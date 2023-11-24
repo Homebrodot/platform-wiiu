@@ -21,7 +21,6 @@ Progress:
 - [ ] Audio (sndcore2)
 - [ ] Networking
   - [ ] HTTPClient
-  - [ ] 
 - [ ]  Input
   - [ ] Gamepad (VPAD)
   - [ ] Wii remotes (KPAD/WPAD)
