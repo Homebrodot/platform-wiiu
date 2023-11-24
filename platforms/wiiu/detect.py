@@ -1,26 +1,27 @@
 import os
 import platform
 import sys
-from methods import get_compiler_version, using_gcc
-from platform_methods import detect_arch
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from SCons import Environment
 
+#Godot for Wii U
+#Based heavily on the Android port, because that's a prime example of linking external libraries,
+#compiling for an arch that is not the host's arch, etc. Also based on SeleDream's port of Godot 2 to 3DS.
+
 def is_active():
-    return False
+    return False #Needs to be true for the platform to be usable, false for convenience
 
 def get_name():
     return "Wii U"
-
 
 def can_build():
     if (not os.getenv("DEVKITPRO")):
         print("DEVKITPRO not found in environment! Wii U target disabled!")
         return False
-    return True  # Wii U enabled
+    return True
 
 
 def get_opts():
@@ -28,7 +29,6 @@ def get_opts():
 
     return [
         EnumVariable("linker", "Linker program", "default", ("default", "bfd", "gold", "lld", "mold")),
-        BoolVariable("use_llvm", "Use the LLVM compiler", False),
         BoolVariable("use_static_cpp", "Link libgcc and libstdc++ statically for better portability", True),
         BoolVariable("use_coverage", "Test Godot coverage", False),
         BoolVariable("use_ubsan", "Use LLVM/GCC compiler undefined behavior sanitizer (UBSAN)", False),
@@ -38,13 +38,7 @@ def get_opts():
         BoolVariable("use_msan", "Use LLVM compiler memory sanitizer (MSAN)", False),
         BoolVariable("use_sowrap", "Dynamically load system libraries", True),
         BoolVariable("alsa", "Use ALSA", True),
-        BoolVariable("pulseaudio", "Use PulseAudio", True),
-        BoolVariable("dbus", "Use D-Bus to handle screensaver and portal desktop settings", True),
-        BoolVariable("speechd", "Use Speech Dispatcher for Text-to-Speech support", True),
-        BoolVariable("fontconfig", "Use fontconfig for system fonts support", True),
-        BoolVariable("udev", "Use udev for gamepad connection callbacks", True),
-        BoolVariable("x11", "Enable X11 display", True),
-        BoolVariable("touch", "Enable touch events", True),
+        BoolVariable("touch", "Enable touch events", True), #probably the only option here that should stay lol
         BoolVariable("execinfo", "Use libexecinfo on systems where glibc is not available", False),
     ]
 
@@ -58,30 +52,32 @@ def get_doc_path():
 
 def get_flags():
     return [
-        ("arch", detect_arch()),
+        ("arch", "ppc32"),
     ]
 
 def configure(env: "Environment"):
-    # Validate arch.
-    supported_arches = ["ppc32"]
+    # Validate arch. These are supported COMPILE arches, not supported EXPORT arches.
+    supported_arches = ["x86_32", "x86_64", "arm32", "arm64"] #Does devkitppc even work on ARM...???
     if env["arch"] not in supported_arches:
         print(
-            'Unsupported CPU architecture "%s" for Wii U. Supported architectures are: ppc32.'
+            'Unsupported CPU architecture "%s" for Wii U. Supported architectures are: %s.'
             % (env["arch"], ", ".join(supported_arches))
         )
-        sys.exit(255)
+        sys.exit()
 
     ## Build type
 
-    if env.dev_build:
-        # This is needed for our crash handler to work properly.
-        # gdb works fine without it though, so maybe our crash handler could too.
-        env.Append(LINKFLAGS=["-rdynamic"])
-
-    # CPU architecture flags.
-    if env["arch"] == "rv64":
-        # G = General-purpose extensions, C = Compression extension (very common).
-        env.Append(CCFLAGS=["-march=rv64gc"])
+    env["bits"] = "32"
 
     ## Compiler configuration
+    devkitpath = env["DEVKITPRO"]
+    wutpath = devkitpath + "/wut" 
+    wuhbpath = devkitpath + "tools/bin/wuhbtool" #I figure this will be needed to export to wuhb?
+
+    #Link flags
+
+    env.Prepend(CPPPATH=["#platform/wiiu"])
+    env.Append(LIBS=["wut"])
+
+
     
