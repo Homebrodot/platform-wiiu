@@ -6,21 +6,28 @@ Uses/Will use WUT.
 This repo will only contain the relevant folders to add to an existing copy of the Godot source code.
 
 
-Progress:
-- [ ] Core
-  - [ ] Memory management
-  - [ ] Crash handling
-  - [ ] Multithreading
+# Progress
+## Vital core things
+- [ ] Threading
+  - [ ] Thread
+  - [ ] Mutex
+  - [ ] Semaphore
+- [ ] Crash handling
 - [ ] OS integration
   - [ ] Home Menu (ProcUI)
   - [ ] Keyboard overlay (swkbd)
   - [ ] OS information
   - [ ] Time (Time)
+
+## Secondary vital core things
 - [ ] Filesystem access
 - [ ] Graphics (gx2, gx2r)
 - [ ] Audio (sndcore2)
-- [ ] Networking
-  - [ ] HTTPClient
 - [ ]  Input
   - [ ] Gamepad (VPAD)
   - [ ] Wii remotes (KPAD/WPAD)
+
+## Nice QoL things
+- [ ] Networking
+  - [ ] HTTPClient
+
