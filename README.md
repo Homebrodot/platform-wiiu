@@ -31,3 +31,4 @@ This repo will only contain the relevant folders to add to an existing copy of t
 - [ ] Networking
   - [ ] HTTPClient
 
+If you have any questions, join my [Discord](https://discord.com/invite/Mu6YUEmerN) or make an issue here on GitHub
