@@ -16,7 +16,8 @@ This repo will only contain the relevant folders to add to an existing copy of t
 - [ ] OS integration
   - [ ] Home Menu (ProcUI)
   - [ ] Keyboard overlay (swkbd)
-  - [ ] OS information
+  - [ ] Software information
+  - [x] Hardware information
   - [ ] Time (Time)
 
 ## Secondary vital core things
