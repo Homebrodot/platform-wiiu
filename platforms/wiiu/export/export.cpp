@@ -26,8 +26,10 @@
 /* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
+
 #include "export.h"
-#include "scene/resources/texture.h"
+
+#include "editor/export/editor_export.h"
 
 void register_wiiu_exporter_types(){
 	GDREGISTER_VIRTUAL_CLASS(EditorExportPlatformWiiU)
