@@ -8,10 +8,10 @@ This repo will only contain the relevant folders to add to an existing copy of t
 
 # Progress
 ## Vital core things
-- [ ] Threading
-  - [ ] Thread
-  - [ ] Mutex
-  - [ ] Semaphore
+- [ ] Threading (coreinit)
+  - [ ] Thread (coreinit/thread)
+  - [ ] Mutex (coreinit/mutex)
+  - [ ] Semaphore (coreinit/semaphore)
 - [ ] Crash handling
 - [ ] OS integration
   - [ ] Home Menu (ProcUI)
@@ -26,7 +26,7 @@ This repo will only contain the relevant folders to add to an existing copy of t
 - [ ] Audio (sndcore2)
 - [ ]  Input
   - [ ] Gamepad (VPAD)
-  - [ ] Wii remotes (KPAD/WPAD)
+  - [ ] Wii remotes (KPAD)
 
 ## Nice QoL things
 - [ ] Networking
