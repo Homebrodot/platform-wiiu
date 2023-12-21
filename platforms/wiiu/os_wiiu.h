@@ -3,8 +3,6 @@
 #include "core/os/os.h"
 
 class OS_WiiU : public OS {
-
-
 public: 
     //Most of this is copy pasted from the Windows platform code
 	virtual void alert(const String &p_alert, const String &p_title = "ALERT!") override;
@@ -59,10 +57,6 @@ public:
 	virtual String get_environment(const String &p_var) const override;
 	virtual void set_environment(const String &p_var, const String &p_value) const override;
 	virtual void unset_environment(const String &p_var) const override;
-
-
-
-
 
 	virtual uint64_t get_embedded_pck_offset() const override;
 

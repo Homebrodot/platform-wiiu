@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 #Godot for Wii U
 #Based heavily on the Android port, because that's a prime example of linking external libraries,
-#compiling for an arch that is not the host's arch, etc. Also based on SeleDream's port of Godot 2 to 3DS.
+#compiling for an arch that is not the host's arch, etc. Also based on SeleDream's port of Godot 4 to 3DS.
 
 def is_active():
     return False #Needs to be true for the platform to be usable, false for convenience
@@ -18,8 +18,8 @@ def get_name():
     return "Wii U"
 
 def can_build():
-    if (not os.getenv("DEVKITPRO")):
-        print("DEVKITPRO not found in environment! Wii U target disabled!")
+    if not(os.getenv("DEVKITPRO") and os.getenv("DEVKITPPC")):
+        print("Either DevKitPro or DevKitPPC were not found, Wii U disabled.")
         return False
     return True
 
@@ -73,9 +73,8 @@ def configure(env: "Environment"):
     devkitpath = env["DEVKITPRO"]
     wutpath = devkitpath + "/wut" 
     wuhbpath = devkitpath + "tools/bin/wuhbtool" #I figure this will be needed to export to wuhb?
-
     #Link flags
-
+    
     env.Prepend(CPPPATH=["#platform/wiiu"])
     env.Append(LIBS=["wut"])
 
