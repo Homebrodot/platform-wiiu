@@ -75,7 +75,7 @@ void Thread::wait_to_finish() {
 	uint32_t joinresult;
 	OSJoinThread(thread, *joinresult)
 	//re-init thread?
-	thread = ;
+	//thread = ;
 	id = UNASSIGNED_ID;
 }
 
@@ -94,6 +94,7 @@ Thread::~Thread() {
 				"A Thread object is being destroyed without its completion having been realized.\n"
 				"Please call wait_to_finish() on it to ensure correct cleanup.");
 #endif
-		thread.detach();
+		//thread.detach();
+		OSDetachThread(thread);
 	}
 }

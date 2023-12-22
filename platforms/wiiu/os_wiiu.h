@@ -2,8 +2,24 @@
 #include "core/input/input.h"
 #include "core/os/os.h"
 
+
+#include "input/drc.h"
+#include "input/kpad.h"
+
+
 class OS_WiiU : public OS {
 public: 
+
+	InputWiiU *input_wiiu;
+
+	enum TVResolution {
+		RESOLUTION_1080P,
+		RESOLUTION_720P,
+		RESOLUTION_480P,
+	}
+
+	TVResolution tvres;
+
     //Most of this is copy pasted from the Windows platform code
 	virtual void alert(const String &p_alert, const String &p_title = "ALERT!") override;
 
@@ -85,4 +101,9 @@ public:
 
     OS_WiiU();
     ~OS_WiiU();
+}
+
+
+class WiiUTerminalLogger: public StdLogger {
+
 }

@@ -7,6 +7,7 @@
 #else 
 #include "platform/wiiu/platform_thread.h"
 
+
 void wiiu_thread_set_priority(Thread::Settings settings);
 
 void wiiu_thread_set_name(const String thrname);

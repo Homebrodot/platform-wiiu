@@ -84,3 +84,26 @@ double OS_WiiU::get_unix_time() {
     thetime = OSGetTime();
     
 }
+
+void OS_WiiU::run(){
+	if (!main_loop) {
+		return;
+	}
+
+	main_loop->initialize();
+
+	//uint64_t last_ticks=get_ticks_usec();
+
+	//int frames=0;
+	//uint64_t frame=0;
+
+	while (true) {
+		DisplayServer::get_singleton()->process_events(); // get rid of pending events
+		input_wiiu->process_inputs();
+
+
+		if (Main::iteration()) {
+			break;
+		}
+    
+}
