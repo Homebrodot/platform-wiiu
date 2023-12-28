@@ -2,11 +2,11 @@
 #include "core/templates/safe_refcount.h"
 #include "core/typedefs.h"
 
-#ifndef PLATFORM_THREAD_OVERRIDE
-#include "core/os/thread.h"
-#else 
+#ifdef PLATFORM_THREAD_OVERRIDE
 #include "platform/wiiu/platform_thread.h"
-
+#else 
+#include "core/os/thread.h"
+#endif
 
 void wiiu_thread_set_priority(Thread::Settings settings);
 
