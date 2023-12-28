@@ -21,17 +21,21 @@ public:
 	TVResolution tvres;
 
     //Most of this is copy pasted from the Windows platform code
+
+	//I think I need to go back and redo my implementation of this
 	virtual void alert(const String &p_alert, const String &p_title = "ALERT!") override;
 
+	//Dunno what this is.
 	virtual Error get_entropy(uint8_t *r_buffer, int p_bytes) override;
 
+	//Maybe these will be used for RPLs? I'll have to look into what exactly these are for
 	virtual Error open_dynamic_library(const String p_path, void *&p_library_handle, bool p_also_set_library_path = false, String *r_resolved_path = nullptr) override;
 	virtual Error close_dynamic_library(void *p_library_handle) override;
 	virtual Error get_dynamic_library_symbol_handle(void *p_library_handle, const String p_name, void *&p_symbol_handle, bool p_optional = false) override;
 
 	virtual MainLoop *get_main_loop() const override;
 
-	//OS info
+	//OS info, some of this is implemented
 	virtual String get_name() const override;
 	virtual String get_distribution_name() const override;
 	virtual String get_version() const override;
@@ -44,8 +48,10 @@ public:
 	virtual String get_processor_name() const override;
 	virtual Vector<String> get_video_adapter_driver_info() const override;
 
+	//To-do: Initialized WPADs, DRCs (which will be DisplayServer+VPAD)
 	virtual void initialize_joypads() override {}
 
+	//Time/date info. Should be easy, I just haven't put it in
 	virtual DateTime get_datetime(bool p_utc) const override;
 	virtual TimeZoneInfo get_time_zone_info() const override;
 	virtual double get_unix_time() const override;
@@ -69,6 +75,7 @@ public:
 	virtual int get_process_id() const override;
 	virtual bool is_process_running(const ProcessID &p_pid) const override;
 
+	//...What is an environment?
 	virtual bool has_environment(const String &p_var) const override;
 	virtual String get_environment(const String &p_var) const override;
 	virtual void set_environment(const String &p_var, const String &p_value) const override;
