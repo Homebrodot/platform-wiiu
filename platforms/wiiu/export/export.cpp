@@ -42,7 +42,7 @@ void register_wiiu_exporter() {
 		exporter->set_binary_extension("rpx");
 		exporter->set_release_binary32("wiiu_release");
 		exporter->set_debug_binary32("wiiu_debug");
-		platform->set_name("Wii U");
+		platform->set_name("Nintendo Wii U");
 		platform->set_os_name("Wii U");
 
 		EditorExport::get_singleton()->add_export_platform(exporter);
