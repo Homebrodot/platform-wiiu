@@ -76,6 +76,11 @@ def configure(env: "Environment"):
     #Link flags
     
     env.Prepend(CPPPATH=["#platform/wiiu"])
+    env.Append(
+        CPPFLAGS=[
+            "-DWIIU_ENABLED",
+        ]
+    )
     env.Append(LIBS=["wut"])
 
 
