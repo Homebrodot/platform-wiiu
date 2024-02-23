@@ -28,18 +28,7 @@ def get_opts():
     from SCons.Variables import BoolVariable, EnumVariable
 
     return [
-        EnumVariable("linker", "Linker program", "default", ("default", "bfd", "gold", "lld", "mold")),
-        BoolVariable("use_static_cpp", "Link libgcc and libstdc++ statically for better portability", True),
-        BoolVariable("use_coverage", "Test Godot coverage", False),
-        BoolVariable("use_ubsan", "Use LLVM/GCC compiler undefined behavior sanitizer (UBSAN)", False),
-        BoolVariable("use_asan", "Use LLVM/GCC compiler address sanitizer (ASAN)", False),
-        BoolVariable("use_lsan", "Use LLVM/GCC compiler leak sanitizer (LSAN)", False),
-        BoolVariable("use_tsan", "Use LLVM/GCC compiler thread sanitizer (TSAN)", False),
-        BoolVariable("use_msan", "Use LLVM compiler memory sanitizer (MSAN)", False),
-        BoolVariable("use_sowrap", "Dynamically load system libraries", True),
-        BoolVariable("alsa", "Use ALSA", True),
         BoolVariable("touch", "Enable touch events", True), #probably the only option here that should stay lol
-        BoolVariable("execinfo", "Use libexecinfo on systems where glibc is not available", False),
     ]
 
 def get_doc_classes():
