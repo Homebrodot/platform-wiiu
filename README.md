@@ -24,9 +24,11 @@ This repo will only contain the relevant folders to add to an existing copy of t
 - [ ] Filesystem access
 - [ ] Graphics (gx2, gx2r)
 - [ ] Audio (sndcore2)
-- [ ]  Input
-  - [ ] Gamepad (VPAD)
-  - [ ] Wii remotes (KPAD)
+- [x]  Input
+  - [x] Gamepad (VPAD)
+  - [x] Wii remotes (KPAD)
+  - [x] GameCube Controllers (HPAD)
+  - [ ] HID Devices
 
 ## Nice QoL things
 - [ ] Networking
@@ -34,6 +36,6 @@ This repo will only contain the relevant folders to add to an existing copy of t
 
 # Compiling
 
-I'm adding this here just so people don't ask about it. The SCons script to build the platform isn't done, nor will I worry about it until I have enough done to make it work trying to compile to see if it works.
+The SCons script to build the platform isn't done, so at this time, this cannot yet be (properly) compiled.
 
-If you have any questions, join [The Homebrodot Discord](https://discord.gg/mYzXDke5yv),[my Discord](https://discord.com/invite/Mu6YUEmerN) or make an issue here on GitHub.
+If you have any questions, join [The Homebrodot Discord](https://discord.gg/mYzXDke5yv), [c08o's Discord](https://discord.com/invite/Mu6YUEmerN) or make an issue here on GitHub.
