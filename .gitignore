@@ -1,0 +1,15 @@
+# Generated sources
+*.gen.h
+*.gen.cpp
+
+# Build output
+*.o
+*.obj
+
+# Wii U binaries
+*.wuhb
+*.rpx
+*.elf
+
+# IntelliJ Editors
+.idea/
