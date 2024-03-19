@@ -1,38 +1,10 @@
-# godot-wii-u
+# Godot for Wii U
+
 WIP port of Godot 4 to Wii U
 
-Uses Wii U Toolchain.
+Uses [Wii U Toolchain](https://github.com/devkitPro/wut).
 
 This repo will only contain the relevant folders to add to an existing copy of the Godot source code.
-
-
-# Progress
-## Vital core things
-- [ ] Threading (coreinit)
-  - [ ] Thread (coreinit/thread)
-  - [ ] Mutex (coreinit/mutex)
-  - [ ] Semaphore (coreinit/semaphore)
-- [ ] Crash handling
-- [ ] OS integration
-  - [ ] Home Menu (ProcUI)
-  - [ ] Keyboard overlay (swkbd)
-  - [x] Software information
-  - [x] Hardware information
-  - [ ] Time (Time)
-
-## Secondary vital core things
-- [ ] Filesystem access
-- [ ] Graphics (gx2, gx2r)
-- [ ] Audio (sndcore2)
-- [x]  Input
-  - [x] Gamepad (VPAD)
-  - [x] Wii remotes (KPAD)
-  - [x] GameCube Controllers (HPAD)
-  - [ ] HID Devices
-
-## Nice QoL things
-- [ ] Networking
-  - [ ] HTTPClient
 
 # Compiling
 
