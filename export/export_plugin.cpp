@@ -36,17 +36,12 @@ bool EditorExportPlatformWiiU::has_valid_project_configuration(const Ref<EditorE
     return false;
 }
 
-//TODO: Fix this; this is literally copy-pasted from IOS with a line change, lol
 List<String> EditorExportPlatformWiiU::get_binary_extensions(const Ref<EditorExportPreset> &p_preset) const {
 	List<String> list;
-	if (p_preset.is_valid()) {
-		bool project_only = p_preset->get("application/export_project_only");
-		if (project_only) {
-			list.push_back("xcodeproj");
-		} else {
-			list.push_back("rpx");
-		}
-	}
+	list.push_back("elf");
+	list.push_back("rpx");
+	list.push_back("wuhb");
+	
 	return list;
 }
 
