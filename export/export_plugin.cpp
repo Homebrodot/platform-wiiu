@@ -57,6 +57,7 @@ Error EditorExportPlatformWiiU::export_project(const Ref<EditorExportPreset> &p_
 void EditorExportPlatformWiiU::get_platform_features(List<String> *r_features) const {
 		r_features->push_back("game_console");
 		r_features->push_back("homebrew");
+		r_features->push_back("wii_pointer");
 }
 
 void EditorExportPlatformWiiU::resolve_platform_feature_priorities(const Ref<EditorExportPreset> &p_preset, HashSet<String> &p_features){
