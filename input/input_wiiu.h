@@ -1,50 +1,48 @@
 #include "core/input/input.h"
 
-
-
-typedef struct button_translate {
-    //Some sort of "*Button" value from one of the APIs
+struct button_translate {
     uint32_t wiiu_button;
-    //Either a JoyButton or JoyAxis
-    int godot_button; 
+    JoyButton godot_button;
 };
 
-enum WiiUControllerTypes {
-    TYPE_GAMEPAD,
-    TYPE_WIIMOTE_ALONE,
-    TYPE_WIIMOTE_NUNCHUK,
-    TYPE_WIIMOTE_CLASSIC,
-    TYPE_WIIU_PRO,
-    TYPE_GAMECUBE_HPAD,
-    TYPE_HID_USB,
+//Up, Down, Left, Right
+struct hat_translate {
+    uint32_t wiiu_button;
+    HatMask godot_button;
+};
+
+//Left X, Left Y, Right X, Right Y, Left Trigger, Right Trigger
+struct axis_translate {
+    float left_x;
+    float left_y;
+    float right_x;
+    float right_y;
+    float trigger_l;
+    float trigger_r;
+};
+
+enum WiiUAPITypes {
+    API_NULL,
+    API_VPAD,
+    API_KPAD,
+    API_HPAD,
+    API_USB_HID,
 };
 
 /*
 These are little objects representing each controller.
-They're designed to be semi API agnostic so that I can reuse them 
-for the mostly quite similar VPAD, KPAD, HPAD, etc APIs.
+They're designed to be API agnostic in the frontend so that I can 
+reuse them for the mostly quite similar VPAD, KPAD, HPAD, etc APIs,
+changing relevant code in the backend.
 */
 class WiiUController {
 //Class shared
 public:
 
-    //Defined in kpad.cpp
-    static const button_translate wiimote_buttons[11];
-    static const button_translate nunchuck_buttons[11];
-    static const button_translate classic_buttons[15];
-    static const button_translate classic_axes[10];
-    static const button_translate pro_buttons[15];
-
-    //Defined in vpad.cpp
-    static const button_translate gamepad_buttons[15];
-
-    //Defined in (coming soon)
-    static const button_translate gamecube_buttons[15];
-
     /*
     These increase when a controller is added and 
     decrease when one is destroyed, so that channels 
-    can be properly assigned/freed upon creation/deletion
+    can be properly assigned/"freed" upon creation/deletion
     */
     static uint8_t vpad_increment;
     static uint8_t kpad_increment;
@@ -61,28 +59,41 @@ private:
     //the controller is closed, close the associated "Window" for its screen
     int gd_controller_id;
 
-    WiiUControllerTypes controller_type;
+    //Tbh could replace with WiiUAPIType
+    WiiUAPITypes api_type;
 
-    //The channel the controller internally corresponds to. Typecast to the right type.
+    //The channel the controller internally corresponds to in its API. (Typecast as needed)
     uint8_t cont_chan;
 
-    //For performance reasons, keep a pointer to the translation chart of the controller
-    button_translate *chart;
+    //Helper function for sending all standard joypad axis info to the singleton
+    //Any extra axes have to be passed manually by the backing API processing function
+    void axis_process(axis_translate axis_group);
 
-    void button_read();
-    void analog_read();
+    //These are defined here in order to be in class scope for other functions
+
+    void init_vpad();
+    void update_vpad();
+
+    void init_kpad();
+    void update_kpad();
+
+    void init_hpad();
+    void update_hpad();
+
+    void init_hid();
+    void update_hid();
 
 //Object specific
 public:
 
     //Update the controller
-    void update();
+    void (*update)() = nullptr;
 
-    inline uint8_t get_player_place();
-    inline uint8_t find_new_player_place();
+    //Sometimes, the object will need to change its backing controller
+    void change_controller_type(WiiUAPITypes type);
 
     //Setup joypad
-    WiiUController(WiiUControllerTypes type = TYPE_WIIMOTE_ALONE); 
+    WiiUController(WiiUAPITypes type = API_NULL); 
     //destroy joypad
     ~WiiUController();
 
@@ -100,25 +111,13 @@ public:
 
     WiiUController controllers[15];
 
-    Input *input = nullptr;
-
-    void setup_kpad();
-    void remove_kpad();
-    void setup_vpad();
-    void remove_vpad();
-    void setup_hpad();
-    void remove_hpad();
-
-    void process_vpad();
-    void process_kpad();
-    void process_hpad();
-
-    //Used for input processing when swkbd is active, possibly also HID USB keyboards?
-    void process_keyboard();
+    //Used for input processing when swkbd is active?
+    void process_swkbd();
 
     inline void process_joypads(){
-        process_vpad();
-        process_kpad();
+        for (uint8_t i = 0; i < Input::JOYPADS_MAX; i++){
+            controllers[i].update();
+        }
     }
 };
 

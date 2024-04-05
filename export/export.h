@@ -30,6 +30,8 @@
 #ifndef WIIU_EXPORT_H
 #define WIIU_EXPORT_H
 
+#include "export_plugin.h"
+
 void register_wiiu_exporter_types();
 void register_wiiu_exporter();
 
